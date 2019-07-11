@@ -2,13 +2,221 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "",
-  "projects": {},
+  "projects": {
+    "admin-codeai-admin": {
+      "root": "apps/admin/codeai-admin",
+      "sourceRoot": "apps/admin/codeai-admin/src",
+      "projectType": "application",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/web:build",
+          "options": {
+            "outputPath": "dist/apps/admin/codeai-admin",
+            "index": "apps/admin/codeai-admin/src/index.html",
+            "main": "apps/admin/codeai-admin/src/main.tsx",
+            "polyfills": "apps/admin/codeai-admin/src/polyfills.ts",
+            "tsConfig": "apps/admin/codeai-admin/tsconfig.app.json",
+            "assets": [
+              "apps/admin/codeai-admin/src/favicon.ico",
+              "apps/admin/codeai-admin/src/assets"
+            ],
+            "styles": ["apps/admin/codeai-admin/src/styles.css"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/admin/codeai-admin/src/environments/environment.ts",
+                  "with": "apps/admin/codeai-admin/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "admin-codeai-admin:build"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "admin-codeai-admin:build:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/admin/codeai-admin/tsconfig.app.json",
+              "apps/admin/codeai-admin/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/admin/codeai-admin/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/admin/codeai-admin/jest.config.js",
+            "tsConfig": "apps/admin/codeai-admin/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "admin-codeai-admin-e2e": {
+      "root": "apps/admin/codeai-admin-e2e",
+      "sourceRoot": "apps/admin/codeai-admin-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/admin/codeai-admin-e2e/cypress.json",
+            "tsConfig": "apps/admin/codeai-admin-e2e/tsconfig.e2e.json",
+            "devServerTarget": "admin-codeai-admin:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "admin-codeai-admin:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/admin/codeai-admin-e2e/tsconfig.e2e.json",
+            "exclude": ["**/node_modules/**", "!apps/admin/codeai-admin-e2e/**"]
+          }
+        }
+      }
+    },
+    "public-codeai": {
+      "root": "apps/public/codeai",
+      "sourceRoot": "apps/public/codeai/src",
+      "projectType": "application",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/web:build",
+          "options": {
+            "outputPath": "dist/apps/public/codeai",
+            "index": "apps/public/codeai/src/index.html",
+            "main": "apps/public/codeai/src/main.tsx",
+            "polyfills": "apps/public/codeai/src/polyfills.ts",
+            "tsConfig": "apps/public/codeai/tsconfig.app.json",
+            "assets": [
+              "apps/public/codeai/src/favicon.ico",
+              "apps/public/codeai/src/assets"
+            ],
+            "styles": ["apps/public/codeai/src/styles.css"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/public/codeai/src/environments/environment.ts",
+                  "with": "apps/public/codeai/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "public-codeai:build"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "public-codeai:build:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/public/codeai/tsconfig.app.json",
+              "apps/public/codeai/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/public/codeai/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/public/codeai/jest.config.js",
+            "tsConfig": "apps/public/codeai/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "public-codeai-e2e": {
+      "root": "apps/public/codeai-e2e",
+      "sourceRoot": "apps/public/codeai-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/public/codeai-e2e/cypress.json",
+            "tsConfig": "apps/public/codeai-e2e/tsconfig.e2e.json",
+            "devServerTarget": "public-codeai:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "public-codeai:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/public/codeai-e2e/tsconfig.e2e.json",
+            "exclude": ["**/node_modules/**", "!apps/public/codeai-e2e/**"]
+          }
+        }
+      }
+    }
+  },
   "cli": {
     "warnings": {
       "typescriptMismatch": false,
       "versionMismatch": false
     },
-    "defaultCollection": "@nrwl/workspace"
+    "defaultCollection": "@nrwl/react"
   },
-  "schematics": {}
+  "schematics": {},
+  "defaultProject": "admin-codeai-admin"
 }

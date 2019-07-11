@@ -7,5 +7,18 @@
     "tslint.json": "*",
     "nx.json": "*"
   },
-  "projects": {}
+  "projects": {
+    "admin-codeai-admin": {
+      "tags": []
+    },
+    "admin-codeai-admin-e2e": {
+      "tags": []
+    },
+    "public-codeai": {
+      "tags": []
+    },
+    "public-codeai-e2e": {
+      "tags": []
+    }
+  }
 }
