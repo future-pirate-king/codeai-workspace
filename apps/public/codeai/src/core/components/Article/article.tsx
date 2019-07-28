@@ -4,7 +4,6 @@ import NavBar from '../Nav Bar/navbar';
 import TableOfContents from '../Table of contents/table-of-contents';
 import './article.css';
 import ArticleContent from '../Article Content/article-content';
-import { ScrollSpy } from 'materialize-css';
 import { highlightAll } from 'prismjs';
 import 'prismjs/components/prism-python.min';
 import { useStoreState, useStoreActions } from '../../store';
@@ -15,14 +14,6 @@ export interface ArticleProps {
     };
   };
 }
-
-const initScrollspy = () => {
-  const scrollspy = document.querySelectorAll('.scrollspy');
-
-  ScrollSpy.init(scrollspy, {
-    activeClass: 'scroll-active'
-  });
-};
 
 const Article: React.FunctionComponent<ArticleProps> = ({ match }) => {
   const { id, title, tableOfContents, contents } = useStoreState(
@@ -42,7 +33,6 @@ const Article: React.FunctionComponent<ArticleProps> = ({ match }) => {
       fetchArticle(urlId);
 
       highlightAll();
-      initScrollspy();
     }
 
     return () => {

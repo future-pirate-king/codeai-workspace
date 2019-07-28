@@ -1,83 +1,73 @@
 import * as React from 'react';
-import './navbar.css';
-import { NavLink } from 'react-router-dom';
 import { StatisticsModel } from '../../@types/channel.types';
+import { navBarStyles } from './navbar-styles';
+import AppBar from '@material-ui/core/AppBar';
+import Link from '@material-ui/core/Link';
+import Box from '@material-ui/core/Box';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import InputBase from '@material-ui/core/InputBase';
+import { Grid } from '@material-ui/core';
 
 export interface NavBarProps {
   className?: string;
   statistics?: StatisticsModel;
 }
 
+const CHANNEL_LINK =
+  'https://www.youtube.com/channel/UCxh3BvgXBr3oTi_VHoewdyg?view_as=subscriber';
+
 const NavBar: React.FunctionComponent<NavBarProps> = props => {
   const { statistics } = props;
+  const classes = navBarStyles({});
   return (
     <React.Fragment>
-      <div id="navbar-container">
-        <div className="navbar">
-          <h5>codeAi</h5>
-          <ul>
-            <li>
-              <NavLink className="links" to={'/home'} activeClassName="active">
-                Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink className="links" to={'/videos'}>
-                Videos
-              </NavLink>
-            </li>
-            <li className="hide-searchbar">
-              <SearchBar />
-            </li>
-            <li style={{ display: 'none' }} className="show-searchbar-med">
-              <a
-                style={{ background: 'transparent' }}
-                className="btn btn-floating z-depth-0 waves-effect"
+      <Box className={classes.root}>
+        <AppBar className={classes.appBar} position="fixed">
+          <Toolbar classes={{ root: classes.toolBarRoot }}>
+            <Typography className={classes.title} variant="h6" noWrap>
+              CodeAi
+            </Typography>
+            <Grid
+              style={{ width: 'auto' }}
+              container
+              direction="row"
+              justify="space-between"
+              alignItems="center"
+            >
+              <div className={classes.search}>
+                <div className={classes.searchIcon}>
+                  <i className="fa fa-search" />
+                </div>
+                <InputBase
+                  placeholder="Search…"
+                  classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput
+                  }}
+                  inputProps={{ 'aria-label': 'search' }}
+                />
+              </div>
+              <Link
+                component="a"
+                target="_blank"
+                rel="noreferrer"
+                href={CHANNEL_LINK}
               >
-                <i className="fa fa-search grey-text text-darken-2" />
-              </a>
-            </li>
-            {statistics && (
-              <li>
-                <p className="subs">
-                  Subscribers
-                  <span className="badge z-depth-1">
-                    {statistics.subscriberCount}
-                  </span>
-                </p>
-                <span style={{ display: 'none' }} className="badge show-badge">
-                  {statistics.subscriberCount}
-                </span>
-              </li>
-            )}
-            <li>
-              <span style={{ fontSize: 20, fontWeight: 'bold' }}>|</span>
-            </li>
-            <li>
-              <i
-                style={{ color: '#FF0000' }}
-                className="fab fa-youtube fa-2x"
-              />
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div id="nav-offset" />
+                <IconButton
+                  className={classes.iconButton}
+                  aria-label="Go to channel page"
+                >
+                  <i className="fab fa-youtube" />
+                </IconButton>
+              </Link>
+            </Grid>
+          </Toolbar>
+        </AppBar>
+      </Box>
+      <div style={{ height: 64 }} id="nav-offset" />
     </React.Fragment>
-  );
-};
-
-export const SearchBar = () => {
-  return (
-    <div className="search-container">
-      <div className="search">
-        <i className="fa fa-search grey-text text-lighten-1" />
-        <input type="search" placeholder="Enter topics to search" />
-        {/* <a className="valign-wrapper">
-            <i className="fa fa-times-circle grey-text" />
-          </a> */}
-      </div>
-    </div>
   );
 };
 

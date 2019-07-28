@@ -29,10 +29,11 @@
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.9.0",
+    "@material-ui/core": "^4.2.1",
+    "@material-ui/styles": "^4.2.1",
     "document-register-element": "1.13.1",
     "easy-peasy": "^2.4.0",
     "firebase": "^5.11.1",
-    "materialize-css": "^1.0.0",
     "prismjs": "^1.16.0",
     "react": "16.8.3",
     "react-dom": "16.8.3",
